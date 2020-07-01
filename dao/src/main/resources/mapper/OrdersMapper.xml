@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weilai9.dao.mapper.OrdersMapper">
+    <resultMap type="com.weilai9.dao.entity.Orders" id="OrderMap">
+        <result property="orderid" column="orderId" />
+        <result property="orderno" column="orderNo" />
+        <result property="ordertype" column="orderType" />
+        <result property="orderattr" column="orderAttr" />
+        <result property="customerid" column="customerId" />
+        <result property="goodsallmoney" column="goodsAllMoney" />
+        <result property="activemoney" column="activeMoney" />
+        <result property="couponid" column="couponId" />
+        <result property="couponmoney" column="couponMoney" />
+        <result property="realmoney" column="realMoney" />
+        <result property="state" column="state" />
+        <result property="paytype" column="payType" />
+        <result property="addtime" column="addTime" />
+    </resultMap>
+
+    <resultMap type="com.weilai9.dao.vo.ordersVo.OrderGoodsVo" id="OrderGoodsMap">
+        <result property="orderGoodsId" column="goodsId" />
+        <result property="orderGoodsNo" column="orderGoodsNo" />
+        <result property="orderGoodsNum" column="num" />
+        <result property="orderGoodsName" column="title" />
+        <result property="orderGoodsSku" column="skuName" />
+        <result property="orderGoodsPrice" column="price" />
+        <result property="orderGoodsHeadImg" column="headImg" />
+        <result property="orderGoodsChangePrice" column="changePrice" />
+        <result property="orderGoodsQrCodeNo" column="qr_code_no" />
+        <result property="orderGoodsQrCodeUrl" column="qr_code_url" />
+        <result property="orderGoodsQrCodeState" column="qrState" />
+    </resultMap>
+
+    <select id="queryByOrderNo" resultMap="OrderMap">
+        select *
+        from orders
+        WHERE orderNo=#{orderNo}
+    </select>
+
+    <select id="getOrderGoodsVoByCondition" resultType="com.weilai9.dao.vo.ordersVo.OrderGoodsVo" resultMap="OrderGoodsMap">
+        select og.goodsId,og.orderGoodsNo,og.num,g.title,gs.skuName,og.price,g.headImg,gs.changePrice,og.qr_code_no,og.qr_code_url,og.qrState
+        from ordergoods og
+        left join goods g on og.goodsId=g.goodsId
+        left join goodssku gs on og.goodsSkuId=gs.goodsSkuId
+        WHERE og.goodsId=#{goodsId}
+        and og.goodsSkuId=#{goodsSku}
+        and og.orderId=#{orderId}
+    </select>
+
+
+
+    <select id="getStoreOrdersList" resultType="map">
+        SELECT o.orderId,o.orderNo,o.state,o.orderType,orderAttr,o.addTime,o.state,og.orderGoodsId,g.title,gs.skuName,og.orderGoodsNo,og.price,og.num,og.qr_code_no,og.qr_code_url,og.qrState FROM orders o
+        LEFT JOIN ordergoods og on o.orderId=og.orderId
+        LEFT JOIN goods g on og.goodsId=g.goodsId
+        LEFT JOIN goodssku gs ON og.goodsSkuId=gs.goodsSkuId
+        <where>
+            <if test="state!=null">
+                 and o.state=#{state}
+            </if>
+            <if test="storeId!=null">
+                 and o.storeId=#{storeId}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

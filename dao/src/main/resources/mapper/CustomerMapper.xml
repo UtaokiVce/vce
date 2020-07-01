@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weilai9.dao.mapper.CustomerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.weilai9.dao.entity.Customer">
+        <id column="customer_id" property="customerId" />
+        <result column="customer_phone" property="customerPhone" />
+        <result column="customer_name" property="customerName" />
+        <result column="customer_password" property="customerPassword" />
+        <result column="customer_type" property="customerType" />
+        <result column="customer_face" property="customerFace" />
+        <result column="customer_gender" property="customerGender" />
+        <result column="customer_age" property="customerAge" />
+        <result column="address_code" property="addressCode" />
+        <result column="parent_id" property="parentId" />
+        <result column="address_info" property="addressInfo" />
+        <result column="address_lng" property="addressLng" />
+        <result column="address_lat" property="addressLat" />
+        <result column="customer_identification_result" property="customerIdentificationResult" />
+        <result column="customer_status" property="customerStatus" />
+        <result column="add_time" property="addTime" />
+        <result column="add_uid" property="addUid" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_uid" property="updateUid" />
+        <result column="invitation_code" property="invitationCode" />
+        <result column="is_bind" property="isBind" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        customer_id, customer_phone, customer_name, customer_password, customer_type, customer_face, customer_gender, customer_age, address_code, address_info, address_lng, address_lat, customer_identification_result, customer_status, last_login_time, add_time, add_uid, update_time, update_uid, invitation_code, is_bind
+    </sql>
+
+
+    <!--查询管理用户详情-->
+    <select id="getManagerCustomerInfo" resultType="map">
+        select
+        c.customer_id as customerId,
+        c.customer_name as customerName,
+        r.role_id as roleId,
+        r.role_name as roleName,
+        c.customer_status as customerStatus
+        FROM customer c
+        LEFT JOIN customer_role cr ON c.customer_id = cr.customer_id AND cr.role_id !=0
+        LEFT JOIN role r ON cr.role_id = r.role_id
+        WHERE c.customer_type = 1 and customer_status != -1
+        <if test="null != customerName and '' != customerName and 'null' != customerName">
+            AND c.customer_name LIKE CONCAT("%", #{customerName},"%")
+        </if>
+    </select>
+
+    <select id="getInfo" resultType="map">
+
+        SELECT
+	w.nickname,
+	w.head_img_url
+FROM
+	customer c
+	LEFT JOIN wx_user w ON c.customer_id = w.customer_id
+WHERE
+	c.customer_id =#{userId}
+
+    </select>
+    <select id="getOrderNum" resultType="map">
+
+        SELECT
+	IFNULL( sum( state = 1 ), 0 ) state1,
+	IFNULL( sum( state = 2 ), 0 ) state2,
+	IFNULL( sum( state = 3 ), 0 ) state3,
+	IFNULL( sum( state = 4 ), 0 ) state4,
+	COUNT( 1 ) total
+FROM
+	orders
+WHERE
+	customerId = #{userId}
+
+
+    </select>
+
+</mapper>

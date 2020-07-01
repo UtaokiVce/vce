@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weilai9.dao.mapper.ActivityMsgDao">
+
+    <resultMap type="com.weilai9.dao.entity.ActivityMsg" id="ActivityMsgMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="activityType" column="activity_type" jdbcType="INTEGER"/>
+        <result property="activityIntroduction" column="activity_introduction" jdbcType="VARCHAR"/>
+        <result property="picUrl" column="pic_url" jdbcType="VARCHAR"/>
+        <result property="activityStartTime" column="activity_start_time" jdbcType="TIMESTAMP"/>
+        <result property="activityEndTime" column="activity_end_time" jdbcType="TIMESTAMP"/>
+        <result property="sponsor" column="sponsor" jdbcType="VARCHAR"/>
+
+        <result property="adultCost" column="adult_cost" jdbcType="NUMERIC"/>
+        <result property="childCost" column="child_cost" jdbcType="NUMERIC"/>
+        <result property="adultJs" column="adult_js" jdbcType="NUMERIC"/>
+        <result property="childJs" column="child_js" jdbcType="NUMERIC"/>
+		 <result property="adultFirstSellAward" column="adult_first_sell_award" jdbcType="NUMERIC"/>
+        <result property="childFirstSellAward" column="child_first_sell_award" jdbcType="NUMERIC"/>
+		 <result property="adultDiamond" column="adult_diamond" jdbcType="NUMERIC"/>
+        <result property="childDiamond" column="child_diamond" jdbcType="NUMERIC"/>
+		<result property="adultActualMoney" column="adult_actual_money" jdbcType="NUMERIC"/>
+		<result property="childActualMoney" column="child_actual_money" jdbcType="NUMERIC"/>
+        <result property="applyNum" column="apply_num" jdbcType="INTEGER"/>
+        <result property="allNum" column="all_num" jdbcType="INTEGER"/>
+        <result property="activityDetails" column="activity_details" jdbcType="VARCHAR"/>
+        <result property="site" column="site" jdbcType="VARCHAR"/>
+        <result property="longitude" column="longitude" jdbcType="DOUBLE"/>
+        <result property="latitude" column="latitude" jdbcType="DOUBLE"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+
+        <result property="refusedReason" column="refused_reason" jdbcType="VARCHAR"/>
+        <result property="notice" column="notice" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getAll"    resultMap="ActivityMsgMap">
+
+        select * from activity_msg
+
+
+    </select>
+
+
+    <select id="getActByType"    resultType="map">
+
+        SELECT
+	id,
+	activity_type,
+	activity_introduction,
+	pic_url,
+	activity_start_time,
+	site,
+	longitude,
+	latitude,
+	apply_num,
+	all_num,
+	`status`
+FROM
+	activity_msg
+WHERE 1=1
+<if test="activityType != null and activityType != ''">
+  and  activity_type = #{activityType}
+</if>
+
+
+
+    </select>
+
+    <select id="getActType" resultType="map">
+
+        select dict_id,dict_name,dict_desc,dict_value from sys_dict where dict_pid=1
+
+    </select>
+
+
+    <select id="getHeXiaoCount" resultType="int">
+
+        SELECT
+	IFNULL(sum( adult_num + child_num ),0) count
+FROM
+	activity_signup
+WHERE
+	activity_id = #{actId}
+	AND `status` =2
+
+    </select>
+
+
+    <select id="getHead" resultType="string">
+
+        SELECT
+	c.customer_face
+FROM
+	activity_signup asu
+	LEFT JOIN customer c ON c.customer_id = asu.user_id
+WHERE
+	activity_id = #{actId}
+ORDER BY
+	asu.create_time ASC
+	LIMIT 4
+
+    </select>
+
+
+
+    <select id="getUserList" resultType="map">
+
+SELECT
+	c.customer_face,
+	asu.telephone,
+	adult_num + child_num num,
+	asu.`name`,
+	asu.`status`
+FROM
+	activity_signup asu
+	LEFT JOIN customer c ON c.customer_id = asu.user_id
+WHERE
+	activity_id = #{actId}
+
+
+    </select>
+
+
+
+    <select id="getMyAct" resultType="map">
+
+		SELECT
+	am.activity_details,
+	asu.adult_num + asu.child_num total_num,
+	am.activity_start_time,
+	am.activity_end_time,
+	asu.practical_money,
+	am.site,
+	asu.id,
+	asu.`status`
+FROM
+	activity_signup asu
+	LEFT JOIN activity_msg am ON am.id = asu.activity_id
+WHERE 1=1
+	and asu.user_id = #{userId}
+
+		<if test="status != null and status=='12'  ">
+			AND (asu.`status` = 3 or  asu.`status` = 5)
+		</if>
+
+		<if test="status != null and status=='13'  ">
+			AND asu.`status` = 1
+		</if>
+		<if test="status != null and status=='14'  ">
+			AND (asu.`status` = 2 or  asu.`status` = 4 or  asu.`status` = 6)
+		</if>
+
+
+    </select>
+
+
+    <select id="queryById" resultType="map">
+
+		SELECT
+		id,
+		activity_introduction,
+	pic_url,
+	apply_num,
+	adult_cost,
+	child_cost,
+	adult_first_sell_award,
+	child_first_sell_award,
+	adult_diamond,
+	child_diamond,
+	sponsor,
+	DATE_FORMAT(activity_start_time,'%Y-%m-%d %H:%i') activity_start_time,
+	DATE_FORMAT(activity_end_time,'%H') activity_end_time,
+	site,
+	activity_details,
+	notice,
+	longitude,
+	latitude
+FROM
+	activity_msg
+
+WHERE 1=1
+	and id=#{actId}
+
+    </select>
+
+
+
+    <select id="getActIndex" resultType="map">
+
+		SELECT
+			dict_id,
+			dict_name name,
+			dict_value details,
+			dict_desc pic_url
+		FROM
+			sys_dict
+		WHERE
+			dict_pid =1
+
+    </select>
+
+
+
+    <select id="getBanner" resultType="map">
+
+		SELECT
+			*
+		FROM
+			webbanner
+
+
+    </select>
+
+
+    <select id="selectByType" resultType="map">
+
+		SELECT
+		am.*,
+		sum(
+		ifnull( asi.adult_num, 0 )) + sum(
+		ifnull( asi.child_num, 0 )) currNum
+		FROM
+		activity_msg am
+		LEFT JOIN activity_signup asi ON asi.activity_id = am.id
+		WHERE
+		am.`status` &lt;&gt; 0
+		AND am.`status` &lt;&gt; 6
+		AND am.activity_type = #{activityType}
+
+    </select>
+
+    <select id="selectCurrNum" resultType="int">
+
+		SELECT
+	ifnull(sum(ifnull( child_num, 0 ))+ sum(ifnull( adult_num, 0 )),0) currNum
+FROM
+	activity_signup
+WHERE
+	activity_id =#{actId}
+
+    </select>
+
+
+    <select id="selectIdList" resultType="int">
+
+		SELECT
+	id
+FROM
+	activity_msg
+WHERE
+	store_id=#{storeId}
+
+    </select>
+
+
+    <insert id="insertAct">
+        INSERT INTO activity_msg (
+	activity_type,
+	activity_introduction,
+	Pic_url,
+	activity_start_time,
+	activity_end_time,
+	sponsor,
+	adult_cost,
+	child_cost,
+	apply_num,
+	all_num,
+	activity_details,
+	site,
+	longitude,
+	latitude,
+	STATUS,
+	create_time,
+	update_time
+)
+VALUE
+	(
+
+	#{activityType},
+	#{activityIntroduction},
+	#{picUrl},
+	#{activityStartTime},
+	#{activityEndTime},
+	#{sponsor},
+	#{adultCost},
+	#{childCost},
+	<if test="applyNum == null">
+	0,
+	</if>
+	<if test="applyNum == null">
+		#{applyNum},
+	</if>
+	#{allNum},
+	#{activityDetails},
+	#{site},
+	#{longitude},
+	#{latitude},
+	#{STATUS},
+		unix_timestamp(now()),
+		unix_timestamp(now())
+	)
+
+    </insert>
+
+
+</mapper>

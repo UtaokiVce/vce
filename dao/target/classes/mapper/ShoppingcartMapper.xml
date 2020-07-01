@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weilai9.dao.mapper.ShoppingcartMapper">
+    <resultMap type="com.weilai9.dao.vo.shoppingCart.CartGoodsVo" id="CartGoodsVoMap">
+        <result property="cartShopId" column="shopId" />
+        <result property="cartStoreId" column="storeId" />
+        <result property="cartGoodsName" column="title" />
+        <result property="goodsSku" column="skuName" />
+        <result property="goodsPrice" column="price" />
+        <result property="goodsMarkPrice" column="markPrice" />
+        <result property="goodsHeadImg" column="headImg" />
+        <result property="cartGoodsNum" column="num" />
+        <result property="cartGoodsId" column="goodsId" />
+        <result property="cartGoodsSkuId" column="goodsSkuId" />
+        <result property="goodsChangePrice" column="changePrice" />
+    </resultMap>
+
+
+    <select id="queryGoodsByGoodsId" resultMap="CartGoodsVoMap">
+        select sc.shopId,sc.storeId,g.title,gs.skuName,gs.price,g.headImg,sc.num,g.goodsId,gs.goodsSkuId,gs.changePrice,gs.markPrice
+        from shoppingcart sc
+        left join goodssku gs on sc.goodsSkuId=gs.goodsSkuId
+        LEFT JOIN goods g on sc.goodsId=g.goodsId
+        WHERE sc.goodsId=#{goodsId}
+        and sc.goodsSkuId=#{goodsSkuId}
+        and sc.customerId=#{customerId}
+        and sc.storeId=#{storeId}
+    </select>
+
+
+    <select id="queryStoreByStoreId" resultType="com.weilai9.dao.entity.Store">
+        select *
+        from store
+        where storeId=#{storeId}
+    </select>
+</mapper>

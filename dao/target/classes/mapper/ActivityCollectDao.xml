@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weilai9.dao.mapper.ActivityCollectDao">
+
+    <resultMap type="com.weilai9.dao.entity.ActivityCollect" id="ActivityCollectMap">
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="activityId" column="activity_id" jdbcType="INTEGER"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <select id="getColl" resultType="map">
+
+        SELECT
+	ac.user_id,
+	ac.activity_id,
+	am.activity_introduction,
+	am.pic_url,
+	am.activity_start_time,
+	am.apply_num,
+	am.all_num,
+	am.site,
+	am.`status`,
+		DATE_FORMAT(ac.create_time ,'%Y-%m-%d %H:%i:%s') create_time
+FROM
+	activity_collect ac
+LEFT JOIN activity_msg am ON am.id = ac.activity_id
+WHERE
+     user_id=#{userId} and type=#{type}
+
+    </select>
+
+    <insert id="addColl" >
+
+        INSERT INTO activity_collect (
+	user_id,
+	activity_id,
+	create_time
+)
+VALUE
+	(
+		#{userId},
+		#{actId},
+		now()
+	)
+
+    </insert>
+
+
+</mapper>

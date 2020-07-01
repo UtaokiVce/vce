@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weilai9.dao.mapper.ActivitySignupDao">
+
+    <resultMap type="com.weilai9.dao.entity.ActivitySignup" id="ActivitySignupMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="activityId" column="activity_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="adultNum" column="adult_num" jdbcType="INTEGER"/>
+        <result property="childNum" column="child_num" jdbcType="INTEGER"/>
+        <result property="discountCouponId" column="discount_coupon_id" jdbcType="INTEGER"/>
+        <result property="amountMoney" column="amount_money" jdbcType="DOUBLE"/>
+        <result property="practicalMoney" column="practical_money" jdbcType="DOUBLE"/>
+        <result property="telephone" column="telephone" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+
+        <result property="adultMarketNum" column="adult_market_num" jdbcType="INTEGER"/>
+        <result property="childMarketNum" column="child_market_num" jdbcType="INTEGER"/>
+
+        <result property="marketCode" column="market_code" jdbcType="VARCHAR"/>
+        <result property="marketTime" column="market_time" jdbcType="TIMESTAMP"/>
+        <result property="cancelTime" column="cancel_time" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getMyAct" resultType="map">
+          SELECT
+	asi.id,
+	asi.activity_id,
+	am.activity_introduction,
+	asi.adult_num + asi.child_num totalNum,
+	asi.practical_money,
+	am.activity_start_time,
+	am.activity_end_time,
+	am.site,
+	am.`status`
+FROM
+	activity_signup asi
+LEFT JOIN activity_msg am ON asi.activity_id = am.id
+WHERE
+	asi.user_id = #{userId}
+
+	<if test="status!=null and status!='0'" >
+        AND am.`status` = #{status}
+    </if>
+    </select>
+
+
+    <select id="getAllAct" resultType="map">
+          SELECT
+	asi.id,
+	asi.activity_id,
+	am.activity_introduction,
+	asi.adult_num + asi.child_num totalNum,
+	asi.`status` orderStatus,
+	asi.practical_money,
+
+	asi.adult_num,
+	asi.child_num,
+	asi.adult_market_num,
+	asi.child_market_num,
+
+	am.activity_start_time,
+	am.activity_end_time,
+	am.site,
+	am.`status`
+FROM
+	activity_signup asi
+LEFT JOIN activity_msg am ON asi.activity_id = am.id
+WHERE
+	1=1
+
+	<if test="status!=null and status!=0" >
+        AND asi.`status` = #{status}
+    </if>
+
+
+	<if test="idlist!=null" >
+		and am.id in
+		<foreach item="item" index="index" collection="idlist" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+    </if>
+
+
+
+	</select>
+
+
+
+
+    <select id="getOne" resultType="map">
+          SELECT
+	asi.id,
+	asi.activity_id,
+	am.activity_introduction,
+	am.activity_start_time,
+	am.activity_end_time,
+	am.site,
+	asi.`name`,
+	asi.telephone,
+	asi.market_code,
+	asi.market_url,
+	am.activity_introduction,
+	IFNULL(asi.adult_num + asi.child_num,0) totalNum,
+	asi.practical_money,
+	asi.create_time,
+	am.`status`
+FROM
+	activity_signup asi
+LEFT JOIN activity_msg am ON asi.activity_id = am.id
+WHERE
+	asi.id = #{actSignId}
+    </select>
+
+    <select id="getOne1" resultType="map">
+          SELECT
+	asi.id,
+	asi.activity_id,
+	am.activity_introduction,
+	am.activity_start_time,
+	am.activity_end_time,
+	am.site,
+	asi.`name`,
+	asi.telephone,
+	asi.market_code,
+	asi.market_url,
+	am.activity_introduction,
+	IFNULL(asi.adult_num + asi.child_num,0) totalNum,
+	asi.practical_money,
+	asi.create_time,
+	am.`status`
+FROM
+	activity_signup asi
+LEFT JOIN activity_msg am ON asi.activity_id = am.id
+WHERE
+	asi.id = #{actSignId}
+    </select>
+
+    <select id="getChecking" resultType="map">
+          SELECT
+	asi.id,
+	asi.activity_id,
+	am.activity_introduction,
+	asi.adult_num + asi.child_num totalNum,
+	asi.`name`,
+	asi.telephone,
+	am.activity_start_time,
+	am.activity_end_time,
+	am.site,
+	asi.create_time buy_time,
+ra.`status`,
+ra.create_time apply_refund_time
+FROM
+	activity_signup asi
+LEFT JOIN activity_msg am ON asi.activity_id = am.id
+LEFT JOIN activity_refund_apply ra on ra.signup_id = asi.id
+WHERE
+	asi.id = #{actSignId}
+    </select>
+
+
+    <select id="getInfo" resultType="map">
+
+          SELECT
+    asu.id,
+	am.activity_introduction,
+	am.activity_start_time,
+	am.activity_end_time,
+	am.longitude,
+	am.latitude,
+	am.site,
+	asu.`name`,
+	IFNULL(asu.adult_num + asu.child_num,0) total_num,
+	asu.adult_num,
+	asu.child_num,
+	IFNULL(asu.adult_market_num,0) adult_market_num,
+	IFNULL(asu.child_market_num,0) child_market_num,
+	asu.telephone,
+	asu.create_time,
+	asu.market_time,
+	asu.status,
+	am.adult_cost,
+am.child_cost,
+am.pic_url
+FROM
+	activity_signup asu
+	LEFT JOIN activity_msg am ON asu.activity_id = am.id
+WHERE
+	asu.id =#{id}
+
+    </select>
+
+
+    <select id="getObject" resultMap="ActivitySignupMap">
+          SELECT
+	*
+FROM
+	activity_signup asi
+
+WHERE
+	id = #{actSignId}
+    </select>
+
+    <insert id="addOrder" >
+          INSERT INTO activity_signup (
+	user_id,
+	activity_id,
+	NAME,
+	adult_num,
+	child_num,
+	discount_coupon_id,
+
+	amount_money,
+	practical_money,
+	telephone,
+	remark,
+	STATUS,
+	market_code,
+	create_time,
+	update_time
+)
+VALUE
+	(
+		#{userId},
+		#{activityId},
+		#{name},
+		#{adultNum},
+		#{childNum},
+		<if test="discountCouponId == null"> null, </if>
+		<if test="discountCouponId != null"> #{discountCouponId}, </if>
+
+		#{amountMoney},
+		#{practicalMoney},
+		#{telephone},
+		<if test="remark == null"> null, </if>
+		<if test="remark != null"> #{remark}, </if>
+		 1,
+		substring(MD5(RAND()),1,10),
+		unix_timestamp(now()),
+		unix_timestamp(now())
+
+	)
+    </insert>
+
+
+
+	<select id="appointment"  resultType="map">
+
+    SELECT
+        id,
+        "name",
+        adult_cost,
+        child_cost,
+        site,
+        latitude,
+        longitude
+    FROM
+        activity_msg
+    WHERE
+        id =#{id}
+
+</select>
+
+
+</mapper>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weilai9.dao.mapper.ParadiseSignupDao">
+
+    <resultMap type="com.weilai9.dao.entity.ParadiseSignup" id="ParadiseSignupMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="paradiseId" column="paradise_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="forwardDate" column="forward_date" jdbcType="OTHER"/>
+        <result property="adultNum" column="adult_num" jdbcType="INTEGER"/>
+        <result property="childNum" column="child_num" jdbcType="INTEGER"/>
+        <result property="discountCouponId" column="discount_coupon_id" jdbcType="INTEGER"/>
+        <result property="amountMoney" column="amount_money" jdbcType="NUMERIC"/>
+        <result property="practicalMoney" column="practical_money" jdbcType="NUMERIC"/>
+        <result property="telephone" column="telephone" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+
+        <result property="adultMarketNum" column="adult_market_num" jdbcType="INTEGER"/>
+        <result property="childMarketNum" column="child_market_num" jdbcType="INTEGER"/>
+
+        <result property="marketCode" column="market_code" jdbcType="VARCHAR"/>
+        <result property="marketTime" column="market_time" jdbcType="TIMESTAMP"/>
+        <result property="cancelTime" column="cancel_time" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ParadiseSignupMap">
+        select
+          id, user_id, paradise_id, name, forward_date, adult_num, child_num, discount_coupon_id, amount_money, practical_money, telephone, remark, status, market_code, market_time, cancel_time, create_time, update_time
+        from xqsh.paradise_signup
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ParadiseSignupMap">
+        select
+          id, user_id, paradise_id, name, forward_date, adult_num, child_num, discount_coupon_id, amount_money, practical_money, telephone, remark, status, market_code, market_time, cancel_time, create_time, update_time
+        from xqsh.paradise_signup
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="ParadiseSignupMap">
+        select
+          id, user_id, paradise_id, name, forward_date, adult_num, child_num, discount_coupon_id, amount_money, practical_money, telephone, remark, status, market_code, market_time, cancel_time, create_time, update_time
+        from xqsh.paradise_signup
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="paradiseId != null">
+                and paradise_id = #{paradiseId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="forwardDate != null">
+                and forward_date = #{forwardDate}
+            </if>
+            <if test="adultNum != null">
+                and adult_num = #{adultNum}
+            </if>
+            <if test="childNum != null">
+                and child_num = #{childNum}
+            </if>
+            <if test="discountCouponId != null">
+                and discount_coupon_id = #{discountCouponId}
+            </if>
+            <if test="amountMoney != null">
+                and amount_money = #{amountMoney}
+            </if>
+            <if test="practicalMoney != null">
+                and practical_money = #{practicalMoney}
+            </if>
+            <if test="telephone != null and telephone != ''">
+                and telephone = #{telephone}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="status != null ang status!='0'">
+                and status = #{status}
+            </if>
+            <if test="marketCode != null and marketCode != ''">
+                and market_code = #{marketCode}
+            </if>
+            <if test="marketTime != null">
+                and market_time = #{marketTime}
+            </if>
+            <if test="cancelTime != null">
+                and cancel_time = #{cancelTime}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into xqsh.paradise_signup(user_id, paradise_id, name, forward_date, adult_num, child_num, discount_coupon_id, amount_money, practical_money, telephone, remark, status, market_code, market_time,market_url, cancel_time, create_time, update_time)
+        values (#{userId}, #{paradiseId}, #{name}, #{forwardDate}, #{adultNum}, #{childNum}, #{discountCouponId}, #{amountMoney}, #{practicalMoney}, #{telephone}, #{remark}, #{status}, #{marketCode}, #{marketTime},#{marketUrl}, #{cancelTime}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update xqsh.paradise_signup
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="paradiseId != null">
+                paradise_id = #{paradiseId},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="forwardDate != null">
+                forward_date = #{forwardDate},
+            </if>
+            <if test="adultNum != null">
+                adult_num = #{adultNum},
+            </if>
+            <if test="childNum != null">
+                child_num = #{childNum},
+            </if>
+            <if test="discountCouponId != null">
+                discount_coupon_id = #{discountCouponId},
+            </if>
+            <if test="amountMoney != null">
+                amount_money = #{amountMoney},
+            </if>
+            <if test="practicalMoney != null">
+                practical_money = #{practicalMoney},
+            </if>
+            <if test="telephone != null and telephone != ''">
+                telephone = #{telephone},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="status != null and status != '0'">
+                status = #{status},
+            </if>
+            <if test="marketCode != null and marketCode != ''">
+                market_code = #{marketCode},
+            </if>
+            <if test="marketTime != null">
+                market_time = #{marketTime},
+            </if>
+            <if test="cancelTime != null">
+                cancel_time = #{cancelTime},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from xqsh.paradise_signup where id = #{id}
+    </delete>
+
+    <select id="getSignInfo" parameterType="int" resultType="map">
+
+        SELECT
+        ps.id,
+	IFNULL( ps.adult_num + ps.child_num, 0 ) total_num,
+	ps.`name`,
+	ps.telephone,
+	ps.market_code,
+	ps.market_url,
+	DATE_FORMAT( ps.create_time, '%Y-%m-%d %H:%i:%s' ) buy_time,
+	ps.market_code,
+	p.`name` paradise_name,
+	p.opening_time,
+	p.closing_time,
+	p.site
+FROM
+	paradise_signup ps
+	LEFT JOIN paradise p ON p.id = ps.paradise_id
+WHERE
+	ps.id =#{id}
+
+    </select>
+    <select id="getSignInfo2" parameterType="int" resultType="map">
+
+        SELECT
+	IFNULL( ps.adult_num + ps.child_num, 0 ) total_num,
+	ps.`name`,
+	ps.telephone,
+	DATE_FORMAT( ps.create_time, '%Y-%m-%d %H:%i:%s' ) buy_time,
+	DATE_FORMAT( ps.market_time, '%Y-%m-%d %H:%i:%s' ) market_time,
+	p.`name` paradise_name,
+	p.opening_time,
+	p.closing_time,
+	p.site
+FROM
+	paradise_signup ps
+	LEFT JOIN paradise p ON p.id = ps.paradise_id
+WHERE
+	ps.id =#{id}
+
+    </select>
+
+
+
+<select id="getNum"  resultType="int">
+
+        SELECT
+	IFNULL(sum(
+	 adult_num + child_num),0 ) total_num
+FROM
+	paradise_signup
+WHERE
+	paradise_id = #{paradiseId}
+	AND forward_date = #{date}
+
+    </select>
+
+<select id="appointment"  resultType="map">
+
+    SELECT
+        id,
+        name,
+        adult_cost,
+        child_cost,
+        site,
+        latitude,
+        cover,
+        longitude
+    FROM
+        paradise
+    WHERE
+        id =#{paradiseId}
+
+</select>
+
+    <select id="getDetails"  resultType="map">
+
+        SELECT
+	p.`name` paradise_name,
+	p.opening_time,
+	p.closing_time,
+	p.site,
+	ps.`status`,
+	ps.`name` user_name,
+	ps.id,
+	ps.market_url,
+	ps.create_time buy_time,
+
+	IFNULL( sum( ps.adult_num + ps.child_num ), 0 ) total_num,
+	ps.adult_num,
+	ps.child_num,
+	IFNULL( ps.adult_market_num, 0 ) adult_market_num,
+	IFNULL( ps.child_market_num, 0 ) child_market_num,
+	ps.telephone,
+	ps.create_time,
+	ps.market_code,
+	pra.create_time rebund_time,
+	pra.check_time,
+	p.picture,
+	p.adult_cost,
+	p.cover,
+	p.child_cost,
+	ps.market_time
+FROM
+	paradise_signup ps
+	LEFT JOIN paradise p ON p.id = ps.paradise_id
+	LEFT JOIN paradise_refund_apply pra ON pra.signup_id = ps.id
+where
+    ps.id=#{paradiseId}
+
+    </select>
+
+
+    <select id="getAllAct"  resultType="map">
+
+        SELECT
+        ps.`status`,
+        ps.forward_date,
+        p.`name`,
+        IFNULL( ps.adult_num + ps.child_num, 0 ) total_num,
+        p.site,
+
+        ps.adult_num,
+        ps.child_num,
+        ps.adult_market_num,
+        ps.child_market_num,
+
+        ps.amount_money
+        FROM
+        paradise_signup ps
+        LEFT JOIN paradise p ON p.id = ps.paradise_id
+
+        WHERE
+        1=1
+
+        <if test="status!=null and status!=0" >
+            AND ps.`status` = #{status}
+        </if>
+
+
+        <if test="idlist!=null" >
+            and p.id in
+            <foreach item="item" index="index" collection="idlist" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+
+
+
+
+    </select>
+
+</mapper>

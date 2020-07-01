@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weilai9.dao.mapper.GoodsMapper">
+
+    <select id="getCommendGoodsList" resultType="java.util.Map">
+        select g.goodsId,g.title,g.headImg,gs.price,(g.unShopNum+g.shopNum) as shopNum,gs.markPrice from goods g
+        inner join (
+        select goodsId,min(price) price,MAX(markPrice) markPrice from goodssku where `enable`=1 group by goodsId
+        ) as gs on g.goodsId=gs.goodsId
+        where g.isRem=1
+        order by g.remNum desc
+    </select>
+
+    <select id="AdminGetCommendGoodsList" resultType="com.weilai9.dao.entity.Goods">
+        select g.goodsId,g.title,g.ds,g.headImg from goods g
+        inner join (
+        select goodsId,`enable` from goodssku where `enable`=1 group by goodsId
+        ) as gs on g.goodsId=gs.goodsId
+        where g.isRem=1
+        order by g.remNum desc
+    </select>
+
+    <select id="getMaxRemNum" resultType="int">
+        select MAX(remNum) from goods
+    </select>
+
+    <select id="getStoreGoodsImg" resultType="java.util.Map">
+        SELECT gs.goodsId,gs.goodsSkuId,g.headImg
+        FROM storestock ss
+        LEFT JOIN goods g on ss.goodsId=g.goodsId
+        LEFT JOIN goodssku gs on ss.goodsSkuId=gs.goodsSkuId
+        WHERE gs.`enable`=1
+        and ss.storeId=#{storeId}
+
+    </select>
+    
+    <select id="getStoreGoodsList" resultType="java.util.Map">
+        select ss.goodsSkuId,g.cateOne,g.retreat,g.cateTwo,g.isRem,g.detail,g.bannerImg,ss.goodsId,g.headImg,g.title,gs.enable,gs.skuName,g.ds,(g.shopNum+g.unShopNum) shopNum,gs.price,gs.markPrice,gs.onePrice,gs.changePrice,gs.accountPrice,ss.num from storestock ss
+        inner join store s on ss.storeId=s.storeId
+        inner join goods g on ss.goodsId=g.goodsId
+        inner join goodssku gs on gs.goodsSkuId=ss.goodsSkuId
+
+        WHERE
+        gs.`enable` != 5
+        <if test="storeId!=null and storeId!=''">
+            and ss.storeId=#{storeId}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and g.title like CONCAT('%',#{goodsName},'%')
+        </if>
+        <if test="state!=null and state==1">
+            and gs.`enable`=#{state}
+        </if>
+        <if test="state!=null and state==0">
+            and gs.`enable`=#{state}
+        </if>
+        <if test="state!=null and state==2">
+            and gs.`enable`=#{state}
+        </if>
+        <if test="oneType!=null and oneType!=0" >
+            and g.cateOne=#{oneType}
+        </if>
+        <if test="twoType!=null">
+            and g.cateTwo=#{twoType}
+        </if>
+        <if test="priceSort!=null and priceSort==1">
+            order by gs.price desc,gs.goodsSkuId desc
+        </if>
+        <if test="priceSort!=null and priceSort==2">
+            order by gs.price asc,gs.goodsSkuId desc
+        </if>
+    </select>
+    
+    <select id="getShopGoodsList" resultType="java.util.Map">
+        select g.goodsId,g.headImg,g.title,g.ds,gs.price,gs.markPrice,gs.changePrice,gcc.allNum,gcc.goodsNum,g.self,g.goodsType from goods g
+        inner join (
+                select goodsId,min(price) price,MAX(markPrice) markPrice,MAX(changePrice) changePrice from goodssku where `enable`=1 group by goodsId
+                ) as gs on g.goodsId=gs.goodsId
+        left join (
+        select gs.goodsId,count(0) allNum,IFNULL(SUM(IF(gc.score>3,1,0)),0) goodsNum from goodscomment gc
+        inner join goodssku gs on gs.goodsSkuId=gc.goodsId
+
+        group by gs.goodsId
+        ) as gcc on gcc.goodsId=g.goodsId
+        <where>
+        <if test="title!=null and title!=''">
+            and g.title like CONCAT('%',#{title},'%')
+        </if>
+        <if test="cateTwo!=null and cateTwo!=''">
+            and g.cateTwo=#{cateTwo}
+        </if>
+        <if test="cateOne!=null and cateOne!=''">
+            and g.cateOne=#{cateOne}
+        </if>
+        </where>
+        order by
+        <if test="newtime!=null">
+            g.goodsId desc,
+        </if>
+        <if test="shopnum!=null">
+            (g.shopNum+g.unShopNum) desc,
+        </if>
+        <if test="inte!=null and inte==1">
+            gs.changePrice asc,
+        </if>
+        <if test="inte!=null and inte==2">
+            gs.changePrice desc,
+        </if>
+        <if test="price!=null and price==1">
+            gs.price asc,
+        </if>
+        <if test="price!=null and price==2">
+            gs.price desc,
+        </if>
+        g.title asc
+    </select>
+    
+    <select id="getAdminGoodsList" resultType="java.util.Map">
+        select * from goods g
+        inner join goodssku gs on g.goodsId=gs.goodsId
+        <where>
+            and g.self=1
+            <if test="goodsName!=null and goodsName!=''">
+                and g.title like CONCAT('%',#{goodsName},'%')
+            </if>
+            <if test="oneType!=null">
+                and g.cateOne=#{oneType}
+            </if>
+            <if test="twoType!=null">
+                and g.cateTwo=#{twoType}
+            </if>
+        </where>
+    </select>
+    
+    <select id="getAdminTryGoodsList" resultType="java.util.Map">
+        select * from goods g
+        <where>
+            and g.self=0
+            <if test="goodsName!=null and goodsName!=''">
+                and g.title like CONCAT('%',#{goodsName},'%')
+            </if>
+            <if test="oneType!=null">
+                and g.cateOne=#{oneType}
+            </if>
+            <if test="twoType!=null">
+                and g.cateTwo=#{twoType}
+            </if>
+        </where>
+        order by g.state desc,g.goodsId desc
+    </select>
+
+
+    <select id="getGroupBuyInfo" resultType="map">
+
+
+        SELECT
+	s.storeName,
+	s.addr,
+	gf.freight,
+	gsk.price,
+	gsk.changePrice,
+	gsk.skuName,
+	gs.title,
+	gs.headImg
+FROM
+	goods gs
+	LEFT JOIN storestock ss ON ss.goodsId = gs.goodsId
+	LEFT JOIN goodssku gsk ON gsk.goodsId = gs.goodsId
+	LEFT JOIN store s ON s.storeId = ss.storeId
+	LEFT JOIN goods_freight gf ON gf.storeId = s.storeId
+WHERE
+	gs.goodsId = #{goodsid}
+
+    </select>
+
+
+
+
+
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weilai9.dao.mapper.QzmonthlogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.weilai9.dao.entity.Qzmonthlog">
+        <id column="qzmonthlogid" property="qzmonthlogid" />
+        <result column="year" property="year" />
+        <result column="month" property="month" />
+        <result column="customerid" property="customerid" />
+        <result column="personget" property="personget" />
+        <result column="personqz" property="personqz" />
+        <result column="teamget" property="teamget" />
+        <result column="teamqz" property="teamqz" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        qzmonthlogid, year, month, customerid, personget, personqz, teamget, teamqz
+    </sql>
+
+</mapper>

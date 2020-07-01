@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weilai9.dao.mapper.CustomerrelationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.weilai9.dao.entity.Customerrelation">
+        <id column="customer_id" property="customerId"  />
+        <result column="customerh_id" property="customerhId" />
+        <result column="deep" property="deep" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        customer_id, customerhid, deep
+    </sql>
+
+    <select id="bindCustomerSn" >
+        INSERT INTO customerrelation
+        SELECT
+        #{customerId},customerhid,deep + 1
+        FROM
+            customerrelation
+        WHERE
+            customerid = #{invitationCustomerId};
+    </select>
+
+    <select id="updateIntegralByTeam">
+        UPDATE customerqinzuan cq
+        INNER JOIN (
+        SELECT
+            cr.customerhid,
+            sum( cq.personcheckvalue ) suu
+        FROM
+            customerqinzuan cq
+            LEFT JOIN customerrelation cr ON cq.customerid = cr.customerid
+        GROUP BY
+            cr.customerhid
+        ) cr ON cq.customerid = cr.customerhid
+        SET teamcheckvalue = cr.suu + cq.personcheckvalue
+    </select>
+
+    <select id="updateIntegralByMyself">
+        UPDATE customerqinzuan cq
+      SET teamcheckvalue = personcheckvalue
+      WHERE
+	  sharecount = 0
+    </select>
+
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weilai9.dao.mapper.ActiveMapper">
+
+    <select id="getStoreActiveGoodsList" resultType="java.util.Map">
+        select a.*,g.title,g.headImg,gs.skuName,ss.num
+        from active a
+        left join goods g on a.goodsId=g.goodsId
+        left join goodssku gs on gs.goodsSkuId=a.goodsSkuId
+        LEFT JOIN storestock ss on ss.goodsId=a.goodsId and ss.goodsSkuId=a.goodsSkuId
+        where a.storeId=#{storeId}
+        <if test="activeType!=null and activeType==1">
+             and a.activeType=#{activeType}
+        </if>
+        <if test="activeType!=null and activeType==2">
+             and a.activeType=#{activeType}
+        </if>
+        <if test="state!=null and state==1">
+             and a.`enable`=1
+        </if>
+        <if test="state!=null and state==0">
+             and a.`enable`=0
+        </if>
+
+        <if test="priceSort!=null and priceSort==1">
+            order by a.price desc,gs.goodsSkuId desc
+        </if>
+        <if test="priceSort!=null and priceSort==2">
+            order by a.price asc,gs.goodsSkuId desc
+        </if>
+    </select>
+    
+    <select id="getActiveCount" resultType="java.lang.Integer">
+        select count(0) from active
+        where goodsSkuId=#{goodsSkuId} and storeId=#{storeId}
+        and (
+        (beginTime>=#{startTime} and beginTime &lt;=#{endTime})
+        or
+        (endTime>=#{startTime} and endTime &lt;=#{endTime})
+        )
+    </select>
+    
+    <select id="getSecendTimeList" resultType="java.util.Map">
+        select DISTINCT beginTime,
+        case
+        when beginTime &lt;=now() and endTime>now() then 1
+        when beginTime >now() then 2
+        else 3 end as state,endTime
+
+        from active
+        where activeType=1
+        and date(beginTime)=date(now())
+        and `enable`=1
+        order by beginTime asc
+    </select>
+    
+    <select id="getSecendGoodsList" resultType="java.util.Map">
+        select a.activeId,a.goodsSkuId,a.goodsId,g.title,g.headImg,gs.skuName,a.changePrice,gs.markPrice,a.price,a.buyNum,
+        s.storeName,s.addr,st.num stockNum,s.storeId
+        from active a
+        left join goodssku gs on gs.goodsSkuId=a.goodsSkuId
+        left join goods g on g.goodsId=a.goodsId
+        left join store s on a.storeId=s.storeId
+        left join storestock st on st.storeId=a.storeId and a.goodsSkuId=st.goodsSkuId
+        where
+        a.activeType=1
+        and date(a.beginTime)=date(now())
+        and DATE_FORMAT(a.beginTime,'%H:%i:%S')=#{timename}
+        and a.`enable`=1
+        and gs.`enable`=1
+        order by a.buyNum desc,a.activeId desc
+    </select>
+    
+    <select id="getGroupsGoodsList" resultType="java.util.Map">
+        select a.activeId,a.goodsSkuId,a.goodsId,g.self,g.title,g.headImg,gs.skuName,a.changePrice,gs.price markPrice,a.price,a.buyNum,gcc.allNum,gcc.goodsNum
+        from active a
+        left join goodssku gs on gs.goodsSkuId=a.goodsSkuId
+        left join goods g on g.goodsId=a.goodsId
+        left join (
+        select gs.goodsId,count(0) allNum,IFNULL(SUM(IF(gc.score>3,1,0)),0) goodsNum from goodscomment gc
+        inner join goodssku gs on gs.goodsSkuId=gc.goodsId
+        group by gs.goodsId
+        ) as gcc on gcc.goodsId=g.goodsId
+        where
+        a.activeType=2
+        and a.beginTime &lt;=now() and a.endTime>now()
+        and a.`enable`=1
+        and gs.`enable`=1
+        <if test="title!=null and title!=''">
+            and g.title like CONCAT('%',#{title},'%')
+        </if>
+
+        order by
+        <if test="newtime!=null">
+            a.activeId desc,
+        </if>
+        <if test="shopnum!=null">
+            a.buyNum desc,
+        </if>
+        <if test="inte!=null and inte==1">
+            a.changePrice asc,
+        </if>
+        <if test="inte!=null and inte==2">
+            a.changePrice desc,
+        </if>
+        <if test="price!=null and price==1">
+            a.price asc,
+        </if>
+        <if test="price!=null and price==2">
+            a.price desc,
+        </if>
+        g.title asc
+    </select>
+
+
+
+    <select id="getGroupList" resultType="map">
+       SELECT
+	a.*,
+	g.title,
+	g.bannerImg
+FROM
+	active a
+	LEFT JOIN goods g ON a.goodsId = g.goodsId
+WHERE
+	activeType = 2
+    </select>
+</mapper>
