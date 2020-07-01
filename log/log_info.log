@@ -1,0 +1,277 @@
+2020-06-30 16:20:48.324 [main] INFO  com.weilai9.web.SpringMultipleApplication - Starting SpringMultipleApplication on WIN-20NPEG29ONP with PID 9512 (D:\daima\sy\web\target\classes started by Administrator in D:\daima\sy)
+2020-06-30 16:20:48.333 [main] INFO  com.weilai9.web.SpringMultipleApplication - The following profiles are active: dev
+2020-06-30 16:20:56.347 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-06-30 16:20:56.352 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-06-30 16:20:56.431 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 28ms. Found 0 Redis repository interfaces.
+2020-06-30 16:20:57.946 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisConfig' of type [com.weilai9.common.config.redis.RedisConfig$$EnhancerBySpringCGLIB$$cd1cc0e9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-30 16:20:59.145 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (http)
+2020-06-30 16:20:59.166 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8888"]
+2020-06-30 16:20:59.169 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-06-30 16:20:59.169 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-06-30 16:20:59.502 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-06-30 16:20:59.503 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 11077 ms
+2020-06-30 16:20:59.869 [main] INFO  o.s.boot.web.servlet.RegistrationBean - Servlet statViewServlet was not registered (possibly already registered?)
+2020-06-30 16:20:59.874 [main] INFO  o.s.boot.web.servlet.RegistrationBean - Filter webStatFilter was not registered (possibly already registered?)
+2020-06-30 16:21:05.831 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-06-30 16:21:06.119 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-30 16:21:07.044 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2020-06-30 16:21:07.082 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-06-30 16:21:07.540 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2020-06-30 16:21:08.318 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAdminGoodsListUsingGET_1
+2020-06-30 16:21:08.395 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addSecondTimeUsingPOST_1
+2020-06-30 16:21:08.458 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2020-06-30 16:21:08.460 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: logoutUsingPOST_1
+2020-06-30 16:21:08.473 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsInfoUsingGET_1
+2020-06-30 16:21:08.482 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsSortUsingGET_1
+2020-06-30 16:21:08.497 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommendGoodsListUsingGET_1
+2020-06-30 16:21:08.499 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommendStoreListUsingGET_1
+2020-06-30 16:21:08.507 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreListUsingGET_1
+2020-06-30 16:21:08.635 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsSortUsingGET_2
+2020-06-30 16:21:08.647 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: storeStockHistoryUsingGET_1
+2020-06-30 16:21:08.651 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getOrderInfoUsingGET_1
+2020-06-30 16:21:08.654 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreOrderListUsingGET_1
+2020-06-30 16:21:08.683 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectListUsingGET_1
+2020-06-30 16:21:08.784 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addOrderUsingPOST_1
+2020-06-30 16:21:08.825 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_1
+2020-06-30 16:21:08.846 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectOneUsingGET_1
+2020-06-30 16:21:08.900 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getMarketCodeUsingGET_1
+2020-06-30 16:21:08.931 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: analysisHXMUsingGET_1
+2020-06-30 16:21:08.934 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: appointmentUsingGET_1
+2020-06-30 16:21:08.937 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_2
+2020-06-30 16:21:08.944 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getEWMUsingGET_1
+2020-06-30 16:21:08.947 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getOneUsingGET_1
+2020-06-30 16:21:08.950 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: hexiaoUsingGET_1
+2020-06-30 16:21:08.957 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: writeOffUsingPUT_1
+2020-06-30 16:21:08.968 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: monthInfoUsingPOST_1
+2020-06-30 16:21:09.024 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateStatusUsingPOST_1
+2020-06-30 16:21:09.045 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectOneUsingGET_2
+2020-06-30 16:21:09.096 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreActiveGoodsListUsingGET_1
+2020-06-30 16:21:09.117 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: saveGoodsUsingPOST_1
+2020-06-30 16:21:09.120 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: storeMoneyOffListUsingGET_1
+2020-06-30 16:21:09.142 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreGoodsListUsingGET_1
+2020-06-30 16:21:09.146 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: saveGoodsUsingPOST_2
+2020-06-30 16:21:09.215 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_2
+2020-06-30 16:21:09.369 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8888"]
+2020-06-30 16:21:09.409 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (http) with context path ''
+2020-06-30 16:21:09.415 [main] INFO  com.weilai9.web.SpringMultipleApplication - Started SpringMultipleApplication in 25.39 seconds (JVM running for 28.011)
+2020-06-30 16:21:09.417 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 初始化更新接口
+2020-06-30 16:21:09.727 [http-nio-8888-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-30 16:21:09.728 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-06-30 16:21:09.742 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 14 ms
+2020-06-30 16:21:13.367 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-06-30 16:21:46.709 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 缓存接口
+2020-06-30 16:21:47.257 [main] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2020-06-30 16:21:47.265 [main] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2020-06-30 16:21:53.941 [http-nio-8888-exec-9] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [127.0.0.1:15672]
+2020-06-30 16:22:02.890 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 缓存角色
+2020-06-30 16:22:03.035 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 初始化超级管理员接口权限
+2020-06-30 16:25:30.043 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-06-30 16:25:30.301 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-06-30 16:25:37.901 [main] INFO  com.weilai9.web.SpringMultipleApplication - Starting SpringMultipleApplication on WIN-20NPEG29ONP with PID 3920 (D:\daima\sy\web\target\classes started by Administrator in D:\daima\sy)
+2020-06-30 16:25:37.903 [main] INFO  com.weilai9.web.SpringMultipleApplication - The following profiles are active: dev
+2020-06-30 16:25:40.842 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-06-30 16:25:40.847 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-06-30 16:25:40.927 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 28ms. Found 0 Redis repository interfaces.
+2020-06-30 16:25:41.943 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisConfig' of type [com.weilai9.common.config.redis.RedisConfig$$EnhancerBySpringCGLIB$$469c56a5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-30 16:25:42.585 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (http)
+2020-06-30 16:25:42.601 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8888"]
+2020-06-30 16:25:42.604 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-06-30 16:25:42.604 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-06-30 16:25:42.916 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-06-30 16:25:42.916 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 4903 ms
+2020-06-30 16:25:43.100 [main] INFO  o.s.boot.web.servlet.RegistrationBean - Servlet statViewServlet was not registered (possibly already registered?)
+2020-06-30 16:25:43.108 [main] INFO  o.s.boot.web.servlet.RegistrationBean - Filter webStatFilter was not registered (possibly already registered?)
+2020-06-30 16:25:48.639 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-06-30 16:25:48.931 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-30 16:25:49.701 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2020-06-30 16:25:49.745 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-06-30 16:25:50.309 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2020-06-30 16:25:50.936 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAdminGoodsListUsingGET_1
+2020-06-30 16:25:50.996 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addSecondTimeUsingPOST_1
+2020-06-30 16:25:51.048 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2020-06-30 16:25:51.051 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: logoutUsingPOST_1
+2020-06-30 16:25:51.066 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsInfoUsingGET_1
+2020-06-30 16:25:51.075 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsSortUsingGET_1
+2020-06-30 16:25:51.086 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommendGoodsListUsingGET_1
+2020-06-30 16:25:51.089 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommendStoreListUsingGET_1
+2020-06-30 16:25:51.097 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreListUsingGET_1
+2020-06-30 16:25:51.187 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsSortUsingGET_2
+2020-06-30 16:25:51.198 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: storeStockHistoryUsingGET_1
+2020-06-30 16:25:51.203 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getOrderInfoUsingGET_1
+2020-06-30 16:25:51.207 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreOrderListUsingGET_1
+2020-06-30 16:25:51.237 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectListUsingGET_1
+2020-06-30 16:25:51.342 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addOrderUsingPOST_1
+2020-06-30 16:25:51.391 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_1
+2020-06-30 16:25:51.413 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectOneUsingGET_1
+2020-06-30 16:25:51.468 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getMarketCodeUsingGET_1
+2020-06-30 16:25:51.496 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: analysisHXMUsingGET_1
+2020-06-30 16:25:51.498 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: appointmentUsingGET_1
+2020-06-30 16:25:51.501 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_2
+2020-06-30 16:25:51.508 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getEWMUsingGET_1
+2020-06-30 16:25:51.511 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getOneUsingGET_1
+2020-06-30 16:25:51.513 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: hexiaoUsingGET_1
+2020-06-30 16:25:51.521 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: writeOffUsingPUT_1
+2020-06-30 16:25:51.530 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: monthInfoUsingPOST_1
+2020-06-30 16:25:51.585 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateStatusUsingPOST_1
+2020-06-30 16:25:51.608 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectOneUsingGET_2
+2020-06-30 16:25:51.648 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreActiveGoodsListUsingGET_1
+2020-06-30 16:25:51.661 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: saveGoodsUsingPOST_1
+2020-06-30 16:25:51.665 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: storeMoneyOffListUsingGET_1
+2020-06-30 16:25:51.684 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreGoodsListUsingGET_1
+2020-06-30 16:25:51.688 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: saveGoodsUsingPOST_2
+2020-06-30 16:25:51.754 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_2
+2020-06-30 16:25:51.898 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8888"]
+2020-06-30 16:25:51.934 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (http) with context path ''
+2020-06-30 16:25:51.939 [main] INFO  com.weilai9.web.SpringMultipleApplication - Started SpringMultipleApplication in 15.468 seconds (JVM running for 17.882)
+2020-06-30 16:25:51.941 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 初始化更新接口
+2020-06-30 16:25:52.096 [http-nio-8888-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-30 16:25:52.096 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-06-30 16:25:52.109 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 13 ms
+2020-06-30 16:25:55.927 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-06-30 16:26:30.694 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 缓存接口
+2020-06-30 16:26:31.092 [main] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2020-06-30 16:26:31.094 [main] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2020-06-30 16:26:45.283 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 缓存角色
+2020-06-30 16:26:45.446 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 初始化超级管理员接口权限
+2020-06-30 16:27:32.279 [http-nio-8888-exec-10] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+2020-06-30 16:27:32.386 [http-nio-8888-exec-10] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#79295932:0/SimpleConnection@71a0c545 [delegate=amqp://guest@127.0.0.1:5672/, localPort= 9276]
+2020-06-30 16:29:53.703 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-06-30 17:16:07.669 [main] INFO  com.weilai9.web.SpringMultipleApplication - Starting SpringMultipleApplication on WIN-20NPEG29ONP with PID 12740 (D:\daima\sy\web\target\classes started by Administrator in D:\daima\sy)
+2020-06-30 17:16:07.674 [main] INFO  com.weilai9.web.SpringMultipleApplication - The following profiles are active: dev
+2020-06-30 17:16:10.916 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-06-30 17:16:10.921 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-06-30 17:16:11.015 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 30ms. Found 0 Redis repository interfaces.
+2020-06-30 17:16:11.898 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisConfig' of type [com.weilai9.common.config.redis.RedisConfig$$EnhancerBySpringCGLIB$$5c078610] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-30 17:16:12.670 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (http)
+2020-06-30 17:16:12.688 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8888"]
+2020-06-30 17:16:12.691 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-06-30 17:16:12.692 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-06-30 17:16:13.016 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-06-30 17:16:13.017 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 5215 ms
+2020-06-30 17:16:13.148 [main] INFO  o.s.boot.web.servlet.RegistrationBean - Servlet statViewServlet was not registered (possibly already registered?)
+2020-06-30 17:16:13.154 [main] INFO  o.s.boot.web.servlet.RegistrationBean - Filter webStatFilter was not registered (possibly already registered?)
+2020-06-30 17:16:19.605 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-06-30 17:16:19.909 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-30 17:16:20.841 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2020-06-30 17:16:20.869 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-06-30 17:16:21.380 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2020-06-30 17:16:22.374 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAdminGoodsListUsingGET_1
+2020-06-30 17:16:22.484 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addSecondTimeUsingPOST_1
+2020-06-30 17:16:22.584 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2020-06-30 17:16:22.591 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: logoutUsingPOST_1
+2020-06-30 17:16:22.621 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsInfoUsingGET_1
+2020-06-30 17:16:22.635 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsSortUsingGET_1
+2020-06-30 17:16:22.661 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommendGoodsListUsingGET_1
+2020-06-30 17:16:22.665 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommendStoreListUsingGET_1
+2020-06-30 17:16:22.679 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreListUsingGET_1
+2020-06-30 17:16:22.824 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsSortUsingGET_2
+2020-06-30 17:16:22.840 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: storeStockHistoryUsingGET_1
+2020-06-30 17:16:22.846 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getOrderInfoUsingGET_1
+2020-06-30 17:16:22.849 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreOrderListUsingGET_1
+2020-06-30 17:16:22.897 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectListUsingGET_1
+2020-06-30 17:16:23.038 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addOrderUsingPOST_1
+2020-06-30 17:16:23.098 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_1
+2020-06-30 17:16:23.121 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectOneUsingGET_1
+2020-06-30 17:16:23.176 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getMarketCodeUsingGET_1
+2020-06-30 17:16:23.210 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: analysisHXMUsingGET_1
+2020-06-30 17:16:23.213 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: appointmentUsingGET_1
+2020-06-30 17:16:23.217 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_2
+2020-06-30 17:16:23.225 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getEWMUsingGET_1
+2020-06-30 17:16:23.228 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getOneUsingGET_1
+2020-06-30 17:16:23.231 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: hexiaoUsingGET_1
+2020-06-30 17:16:23.237 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: writeOffUsingPUT_1
+2020-06-30 17:16:23.250 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: monthInfoUsingPOST_1
+2020-06-30 17:16:23.304 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateStatusUsingPOST_1
+2020-06-30 17:16:23.329 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectOneUsingGET_2
+2020-06-30 17:16:23.370 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreActiveGoodsListUsingGET_1
+2020-06-30 17:16:23.388 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: saveGoodsUsingPOST_1
+2020-06-30 17:16:23.394 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: storeMoneyOffListUsingGET_1
+2020-06-30 17:16:23.417 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreGoodsListUsingGET_1
+2020-06-30 17:16:23.423 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: saveGoodsUsingPOST_2
+2020-06-30 17:16:23.504 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_2
+2020-06-30 17:16:23.672 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8888"]
+2020-06-30 17:16:23.713 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (http) with context path ''
+2020-06-30 17:16:23.718 [main] INFO  com.weilai9.web.SpringMultipleApplication - Started SpringMultipleApplication in 17.714 seconds (JVM running for 20.157)
+2020-06-30 17:16:23.720 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 初始化更新接口
+2020-06-30 17:16:23.899 [http-nio-8888-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-30 17:16:23.899 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-06-30 17:16:23.916 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 17 ms
+2020-06-30 17:16:27.540 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-06-30 17:17:00.497 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 缓存接口
+2020-06-30 17:17:00.831 [main] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2020-06-30 17:17:00.833 [main] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2020-06-30 17:17:14.648 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 缓存角色
+2020-06-30 17:17:14.794 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 初始化超级管理员接口权限
+2020-06-30 17:28:01.851 [http-nio-8888-exec-3] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+2020-06-30 17:28:01.939 [http-nio-8888-exec-3] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#14b26e90:0/SimpleConnection@3aab7ae [delegate=amqp://guest@127.0.0.1:5672/, localPort= 11073]
+2020-06-30 17:34:58.298 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-06-30 17:35:08.876 [main] INFO  com.weilai9.web.SpringMultipleApplication - Starting SpringMultipleApplication on WIN-20NPEG29ONP with PID 13376 (D:\daima\sy\web\target\classes started by Administrator in D:\daima\sy)
+2020-06-30 17:35:08.879 [main] INFO  com.weilai9.web.SpringMultipleApplication - The following profiles are active: dev
+2020-06-30 17:35:11.676 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-06-30 17:35:11.681 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-06-30 17:35:11.745 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22ms. Found 0 Redis repository interfaces.
+2020-06-30 17:35:12.685 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisConfig' of type [com.weilai9.common.config.redis.RedisConfig$$EnhancerBySpringCGLIB$$476741c9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-30 17:35:13.433 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (http)
+2020-06-30 17:35:13.458 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8888"]
+2020-06-30 17:35:13.462 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-06-30 17:35:13.463 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-06-30 17:35:13.913 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-06-30 17:35:13.914 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 4910 ms
+2020-06-30 17:35:14.103 [main] INFO  o.s.boot.web.servlet.RegistrationBean - Servlet statViewServlet was not registered (possibly already registered?)
+2020-06-30 17:35:14.112 [main] INFO  o.s.boot.web.servlet.RegistrationBean - Filter webStatFilter was not registered (possibly already registered?)
+2020-06-30 17:35:20.583 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-06-30 17:35:20.936 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-30 17:35:21.798 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2020-06-30 17:35:21.827 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-06-30 17:35:22.301 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2020-06-30 17:35:22.946 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAdminGoodsListUsingGET_1
+2020-06-30 17:35:23.016 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addSecondTimeUsingPOST_1
+2020-06-30 17:35:23.074 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2020-06-30 17:35:23.078 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: logoutUsingPOST_1
+2020-06-30 17:35:23.092 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsInfoUsingGET_1
+2020-06-30 17:35:23.102 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsSortUsingGET_1
+2020-06-30 17:35:23.114 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommendGoodsListUsingGET_1
+2020-06-30 17:35:23.117 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommendStoreListUsingGET_1
+2020-06-30 17:35:23.126 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreListUsingGET_1
+2020-06-30 17:35:23.253 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodsSortUsingGET_2
+2020-06-30 17:35:23.271 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: storeStockHistoryUsingGET_1
+2020-06-30 17:35:23.278 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getOrderInfoUsingGET_1
+2020-06-30 17:35:23.284 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreOrderListUsingGET_1
+2020-06-30 17:35:23.318 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectListUsingGET_1
+2020-06-30 17:35:23.423 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addOrderUsingPOST_1
+2020-06-30 17:35:23.478 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_1
+2020-06-30 17:35:23.503 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectOneUsingGET_1
+2020-06-30 17:35:23.565 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getMarketCodeUsingGET_1
+2020-06-30 17:35:23.595 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: analysisHXMUsingGET_1
+2020-06-30 17:35:23.601 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: appointmentUsingGET_1
+2020-06-30 17:35:23.604 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAllUsingGET_2
+2020-06-30 17:35:23.613 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getEWMUsingGET_1
+2020-06-30 17:35:23.617 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getOneUsingGET_1
+2020-06-30 17:35:23.619 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: hexiaoUsingGET_1
+2020-06-30 17:35:23.627 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: writeOffUsingPUT_1
+2020-06-30 17:35:23.638 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: monthInfoUsingPOST_1
+2020-06-30 17:35:23.703 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateStatusUsingPOST_1
+2020-06-30 17:35:23.734 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: selectOneUsingGET_2
+2020-06-30 17:35:23.804 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreActiveGoodsListUsingGET_1
+2020-06-30 17:35:23.827 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: saveGoodsUsingPOST_1
+2020-06-30 17:35:23.831 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: storeMoneyOffListUsingGET_1
+2020-06-30 17:35:23.860 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getStoreGoodsListUsingGET_1
+2020-06-30 17:35:23.870 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: saveGoodsUsingPOST_2
+2020-06-30 17:35:23.987 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_2
+2020-06-30 17:35:24.180 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8888"]
+2020-06-30 17:35:24.234 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (http) with context path ''
+2020-06-30 17:35:24.240 [main] INFO  com.weilai9.web.SpringMultipleApplication - Started SpringMultipleApplication in 16.863 seconds (JVM running for 20.06)
+2020-06-30 17:35:24.245 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 初始化更新接口
+2020-06-30 17:35:24.471 [http-nio-8888-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-30 17:35:24.471 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-06-30 17:35:24.488 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 17 ms
+2020-06-30 17:35:28.207 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-06-30 17:35:58.335 [http-nio-8888-exec-8] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2020-06-30 17:35:58.340 [http-nio-8888-exec-8] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2020-06-30 17:35:59.892 [http-nio-8888-exec-8] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+2020-06-30 17:35:59.995 [http-nio-8888-exec-8] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#18a0721b:0/SimpleConnection@50d6aa8e [delegate=amqp://guest@127.0.0.1:5672/, localPort= 11326]
+2020-06-30 17:36:01.262 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 缓存接口
+2020-06-30 17:36:14.797 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 缓存角色
+2020-06-30 17:36:14.958 [main] INFO  com.weilai9.web.runner.MyApplicationRunner - 初始化超级管理员接口权限
+2020-06-30 18:05:27.105 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-06-30 18:05:27.413 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
