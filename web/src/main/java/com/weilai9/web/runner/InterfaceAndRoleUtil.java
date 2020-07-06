@@ -46,7 +46,6 @@ public class InterfaceAndRoleUtil {
         if (!enable) {
             RestTemplate restTemplate = new RestTemplate();
             String url = "http://localhost:"+port+"/v2/api-docs";
-            System.out.println(url+"dsushddjrghyrddbdrghhdf");
             ResponseEntity<JSONObject> entity = restTemplate.getForEntity(url, JSONObject.class);
             JSONObject body = entity.getBody();
             String tags = body.get("tags", String.class);
@@ -116,9 +115,9 @@ public class InterfaceAndRoleUtil {
                     in.setAddTime(new Date());
                     in.setUpdateTime(new Date());
                     boolean save = sysInterfaceService.saveOrUpdate(in, new QueryWrapper<SysInterface>().eq("if_url", key));
-                    if (!save) {
-                        System.err.println("接口名称：" + key + ",请求方法：" + s + ",描述：" + ids);
-                    }
+//                    if (!save) {
+//                        System.err.println("接口名称：" + key + ",请求方法：" + s + ",描述：" + ids);
+//                    }
                 }
             }
         }

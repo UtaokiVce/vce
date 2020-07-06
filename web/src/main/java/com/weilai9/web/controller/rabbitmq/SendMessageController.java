@@ -22,11 +22,15 @@ public class SendMessageController {
         String messageId = String.valueOf(UUID.randomUUID());
         String messageData = "test message, hello22!";
         String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        Map<String,Object> map=new HashMap<>();
-        map.put("messageId",messageId);
-        map.put("messageData",messageData);
-        map.put("createTime",createTime);
+        Map<String, Object> map = new HashMap<>();
+        map.put("messageId", messageId);
+        map.put("messageData", messageData);
+        map.put("createTime", createTime);
         //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
+        /*  第一个参数是交换器的名字；
+         *  第二个参数是路由键;
+         *  第三个参数是消息对象，消息对象默认使用javajdk自带的序列化方式进行序列化，我们可以写自己的MessageConverter，让消息序列化成json串
+         */
         rabbitTemplate.convertAndSend("TestDirectExchange", "TestDirectRouting", map);
         return "ok";
     }
