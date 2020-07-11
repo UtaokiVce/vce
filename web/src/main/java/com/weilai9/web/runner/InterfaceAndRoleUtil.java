@@ -46,6 +46,7 @@ public class InterfaceAndRoleUtil {
         if (!enable) {
             RestTemplate restTemplate = new RestTemplate();
             String url = "http://localhost:"+port+"/v2/api-docs";
+            System.out.println("swagger:"+url);
             ResponseEntity<JSONObject> entity = restTemplate.getForEntity(url, JSONObject.class);
             JSONObject body = entity.getBody();
             String tags = body.get("tags", String.class);
