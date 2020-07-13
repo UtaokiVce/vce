@@ -46,6 +46,9 @@ public class WxpayController {
     @Resource
     HttpServletRequest request;
 
+    private  static  final String appId = "wx092858e88f3b46f1";
+    private  static  final String mchId = "1566272871";
+
 
     /**
      * 调用统一下单接口，并组装生成支付所需参数对象.
@@ -58,18 +61,19 @@ public class WxpayController {
     @PostMapping("/createOrder")
     //public <T> T createOrder(@RequestBody WxPayUnifiedOrderRequest request) throws WxPayException {
     public Result createOrder() throws WxPayException {
-        Map<String, Object> data = new HashMap<>(16);
+        Map<String, Object> data = new HashMap();
         WxPayUnifiedOrderRequest orderRequest = new WxPayUnifiedOrderRequest();
         String ipAdrress = JobUtil.getIpAdrress(request);
         System.out.println(ipAdrress);
         orderRequest.setNotifyUrl("https://xqsh.cd-weilai9.com/wxpay/notify/order");
-        orderRequest.setAppid("wxe6ba52718dab2302");
+        //orderRequest.setAppid("wxe6ba52718dab2302");
+        orderRequest.setAppid(appId);
+        orderRequest.setMchId(mchId);
         orderRequest.setBody("测试商品")
                 .setDetail("测试商品详情")
                 .setTotalFee(1)
                 .setOutTradeNo("20190902000" + RandomUtil.randomNumbers(8))
-                .setOpenid("onkKYxCYoiF6gpEycSzrq4G0CFks")
-                .setSpbillCreateIp("171.221.52.74")
+
                 .setSpbillCreateIp(JobUtil.getIpAdrress(request))
                 .setTradeType("APP");
         Object result = wxService.createOrder(orderRequest);
