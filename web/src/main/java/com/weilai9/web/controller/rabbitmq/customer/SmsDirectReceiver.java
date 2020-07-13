@@ -1,4 +1,4 @@
-package com.weilai9.common.config.rabbitmq.customer;
+package com.weilai9.web.controller.rabbitmq.customer;
 
 import com.weilai9.common.utils.wechat.HuaweiSmsUtil;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;

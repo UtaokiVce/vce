@@ -16,7 +16,7 @@ public class WXConfigUtil implements WXPayConfig {
 //    //微信支付商户号
 //    public static final String MCH_ID = "1597844111";
 
-      public static final String APP_ID = "wx092858e88f3b46f1";
+    public static final String APP_ID = "wx092858e88f3b46f1";
     //微信支付商户密钥
     public static final String KEY = "GSVv9ou04fVoNuxAjVJI1hubVwPeXBCk";
     //微信支付商户号
