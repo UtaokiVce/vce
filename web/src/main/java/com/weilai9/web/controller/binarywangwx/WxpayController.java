@@ -69,10 +69,10 @@ public class WxpayController {
                 .setTotalFee(1)
                 .setOutTradeNo("20190902000" + RandomUtil.randomNumbers(8))
                 .setOpenid("onkKYxCYoiF6gpEycSzrq4G0CFks")
-                //.setSpbillCreateIp("171.221.52.74")
+                .setSpbillCreateIp("171.221.52.74")
                 .setSpbillCreateIp(JobUtil.getIpAdrress(request))
-                .setTradeType("JSAPI");
-        WxPayMpOrderResult result = wxService.createOrder(orderRequest);
+                .setTradeType("APP");
+        Object result = wxService.createOrder(orderRequest);
         data.put("Result", result);
         System.out.println(orderRequest.getSign());
         return new Result(data);
