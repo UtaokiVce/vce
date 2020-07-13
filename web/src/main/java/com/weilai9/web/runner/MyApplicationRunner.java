@@ -20,10 +20,10 @@ public class MyApplicationRunner implements ApplicationRunner {
         log.info("初始化更新接口");
         interfaceAndRoleUtil.getInterfaceInfo();
         log.info("缓存接口");
-        interfaceAndRoleUtil.redisUrl();
+        //interfaceAndRoleUtil.redisUrl();
         log.info("缓存角色");
-        interfaceAndRoleUtil.redisRole();
+        //interfaceAndRoleUtil.redisRole();
         log.info("初始化超级管理员接口权限");
-        interfaceAndRoleUtil.initIf();
+        //interfaceAndRoleUtil.initIf();
     }
 }
