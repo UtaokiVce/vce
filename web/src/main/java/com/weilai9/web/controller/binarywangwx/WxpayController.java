@@ -15,9 +15,15 @@ import com.github.binarywang.wxpay.service.WxPayService;
 import com.weilai9.common.constant.Result;
 import com.weilai9.common.utils.wechat.ApiStatus;
 import com.weilai9.common.utils.wechat.JobUtil;
+import com.weilai9.common.utils.wechat.RedisHandle;
 import com.weilai9.common.utils.wechat.ReturnUtil;
 import com.weilai9.dao.entity.TestOrder;
+import com.weilai9.dao.entity.WxUser;
+import com.weilai9.dao.vo.wechat.WxOrderVo;
+import com.weilai9.service.wechat.WxUserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -42,45 +48,108 @@ public class WxpayController {
 
     @Resource
     private WxPayService wxService;
-
+    @Resource
+    WxUserService userService;
     @Resource
     HttpServletRequest request;
-
-    private  static  final String appId = "wx092858e88f3b46f1";
-    private  static  final String mchId = "1566272871";
+    @Resource
+    RedisHandle redisHandle;
 
 
     /**
-     * 调用统一下单接口，并组装生成支付所需参数对象.
+     * 微信支付测试
      *
-     * param request 统一下单请求参数
-     * param <T>     请使用{@link com.github.binarywang.wxpay.bean.order}包下的类
-     * return 返回 {@link com.github.binarywang.wxpay.bean.order}包下的类对象
+     * @return message
      */
-    @ApiOperation(value = "统一下单，并组装所需支付参数")
-    @PostMapping("/createOrder")
-    //public <T> T createOrder(@RequestBody WxPayUnifiedOrderRequest request) throws WxPayException {
-    public Result createOrder() throws WxPayException {
-        Map<String, Object> data = new HashMap();
+    @PostMapping("/appPayTest")
+    @ApiOperation(value = "微信支付测试", notes = "微信支付测试")
+    @ApiImplicitParams({
+    })
+    public Map<String, Object> payTest() throws WxPayException {
+        Map<String, Object> data = new HashMap<>(16);
         WxPayUnifiedOrderRequest orderRequest = new WxPayUnifiedOrderRequest();
         String ipAdrress = JobUtil.getIpAdrress(request);
         System.out.println(ipAdrress);
-        orderRequest.setNotifyUrl("https://xqsh.cd-weilai9.com/wxpay/notify/order");
-        //orderRequest.setAppid("wxe6ba52718dab2302");
-        orderRequest.setAppid(appId);
-        orderRequest.setMchId(mchId);
+        orderRequest.setNotifyUrl("https://xqsh.cd-weilai9.com/wxpay/notify/orderMiniApp");
         orderRequest.setBody("测试商品")
                 .setDetail("测试商品详情")
                 .setTotalFee(1)
+                //    .setProfitSharing("Y")
                 .setOutTradeNo("20190902000" + RandomUtil.randomNumbers(8))
-
-                .setSpbillCreateIp(JobUtil.getIpAdrress(request))
-                .setTradeType("APP");
-        Object result = wxService.createOrder(orderRequest);
+                .setOpenid("onkKYxCYoiF6gpEycSzrq4G0CFks")
+                .setSpbillCreateIp(ipAdrress)
+                .setTradeType("JSAPI");
+        WxPayAppOrderResult result = wxService.createOrder(orderRequest);
         data.put("Result", result);
-        System.out.println(orderRequest.getSign());
-        return new Result(data);
+        System.out.println("--------------------------------------------------");
+        return ReturnUtil.returnMap(ApiStatus.SUCCESS, data);
+
     }
+
+
+    /**
+     * @param wxOrderVo 订单信息
+     * @return
+     * @throws WxPayException
+     */
+    @ApiOperation(value = "统一下单，并组装所需支付参数")
+    @PostMapping("/createOrder")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "body", value = "商品描述，如：腾讯充值中心-QQ会员充值", dataType = "String", required = true),
+            @ApiImplicitParam(name = "outTradeNo", value = "商户订单号", dataType = "String", required = true),
+            @ApiImplicitParam(name = "totalFee", value = "订单总金额，单位为分", dataType = "Integer", required = true),
+            @ApiImplicitParam(name = "payType", value = "支付类型  1 miniapp(小程序) 2 app", dataType = "Integer"),
+            @ApiImplicitParam(name = "productId", value = "商品id", dataType = "String"),
+            @ApiImplicitParam(name = "attach", value = "备注信息", dataType = "String"),
+    })
+    public Map<String, Object> createOrder(WxOrderVo wxOrderVo) throws WxPayException {
+
+        //组装所需支付参数
+        WxPayUnifiedOrderRequest wxPayUnifiedOrderRequest = JobUtil.orderInfo2WxPayOrder(wxOrderVo);
+        wxPayUnifiedOrderRequest.setNotifyUrl("https://xqsh.cd-weilai9.com/wxpay/notify/orderMiniApp");//回调地址
+        wxPayUnifiedOrderRequest.setTradeType("JSAPI");//调用方式
+        wxPayUnifiedOrderRequest.setOpenid("openid");//openid
+        wxPayUnifiedOrderRequest.setSpbillCreateIp(JobUtil.getIpAdrress(request));//用户ip
+        Object result = wxService.createOrder(wxPayUnifiedOrderRequest);
+        System.out.println(result);
+        Map<String, Object> data = new HashMap<>(16);
+        data.put("result", result);
+        return ReturnUtil.returnMap(ApiStatus.SUCCESS, data);
+    }
+
+
+    /**
+     * <pre>
+     * 微信支付-申请退款
+     * 详见 https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_4
+     * 接口链接：https://api.mch.weixin.qq.com/secapi/pay/refund
+     * </pre>
+     *
+     * param request 请求对象
+     * @return 退款操作结果
+     */
+    @ApiOperation(value = "退款")
+    @PostMapping("/refund")
+    // @ApiOperationSupport(ignoreParameters = {"deviceInfo", "refundFee", "refundAccount", "refundDesc", "appid",})
+    //  public Map<String, Object> refund(WxPayRefundRequest request) throws WxPayException {
+    public Map<String, Object> refund() throws WxPayException {
+        WxPayRefundRequest request = new WxPayRefundRequest();
+        request.setNotifyUrl("https://www.baidu.com");//回调地址
+        request.setOutTradeNo("102342c8316960fcfd");//商户订单号 （和微信订单号二选一）
+        //request.setTransactionId("4200000620202007098598872942");//微信订单号 （和商户订单号二选一）
+        request.setTotalFee(70); //总金额
+        //request.setDeviceInfo("666");
+        //request.setOpUserId("451445");
+        request.setOutRefundNo("hfxdyhcfhfhfddfh1");//退款号
+        request.setRefundFee(1);//退款金额
+        request.setAppid("wx092858e88f3b46f1");//appid
+        WxPayRefundResult result = wxService.refund(request);
+        Map<String, Object> data = new HashMap<>(16);
+        data.put("result", result);
+        return ReturnUtil.returnMap(ApiStatus.SUCCESS, data);
+
+    }
+
 
 
     /**
@@ -153,22 +222,6 @@ public class WxpayController {
 
     /**
      * <pre>
-     * 微信支付-申请退款
-     * 详见 https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_4
-     * 接口链接：https://api.mch.weixin.qq.com/secapi/pay/refund
-     * </pre>
-     *
-     * @param request 请求对象
-     * @return 退款操作结果
-     */
-    @ApiOperation(value = "退款")
-    @PostMapping("/refund")
-    public WxPayRefundResult refund(@RequestBody WxPayRefundRequest request) throws WxPayException {
-        return this.wxService.refund(request);
-    }
-
-    /**
-     * <pre>
      * 微信支付-查询退款
      * 应用场景：
      *  提交退款申请后，通过调用该接口查询退款状态。退款有一定延时，用零钱支付的退款20分钟内到账，
@@ -224,6 +277,8 @@ public class WxpayController {
         return WxPayNotifyResponse.success("成功");
     }
 
+
+
     /**
      * 发送微信红包给个人用户
      * <pre>
@@ -234,13 +289,31 @@ public class WxpayController {
      *  接口地址：https://api.mch.weixin.qq.com/mmpaymkttransfers/sendgroupredpack
      * </pre>
      *
-     * @param request 请求对象
+     * param request 请求对象
      */
     @ApiOperation(value = "发送红包")
     @PostMapping("/sendRedpack")
-    public WxPaySendRedpackResult sendRedpack(@RequestBody WxPaySendRedpackRequest request) throws WxPayException {
+    public WxPaySendRedpackResult sendRedpack() throws WxPayException {
+
+        WxPaySendRedpackRequest request = new WxPaySendRedpackRequest();
+        request.setAppid("wxe6ba52718dab2302");
+        request.setRemark("哈哈哈");
+        request.setSendName("智慧小电商");
+        request.setTotalAmount(2);
+        request.setTotalNum(3);
+        request.setActName("活动名");
+        request.setAmtType("ALL_RAND");
+        request.setClientIp("175.36.25.16");
+        request.setWxAppid("wxe6ba52718dab2302");
+        request.setReOpenid("oAJQh5YqG8qEud0HLTZprVMOWI0U");
+        request.setNonceStr("xidhnbhnbexdsc");
+        request.setMchBillNo(RandomUtil.randomNumbers(16)+"556654");
+        request.setWishing("爸爸好");//祝福语
+
+
         return this.wxService.sendRedpack(request);
     }
+
 
     /**
      * <pre>
